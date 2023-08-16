@@ -1,4 +1,4 @@
-export const recipe = {
+export const recipe = { 
   id: 782585,
   usedIngredientCount: 0,
   missedIngredientCount: 8,
