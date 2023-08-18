@@ -32,7 +32,7 @@ export const getStaticProps = async () => {
 }
 const StyledDiv = styled.div`
   display: flex;
-flex-direction:column;
+flex-direction:column; 
 align-items:center;
 `;
 const Div = styled.div`
@@ -49,7 +49,7 @@ export default function Recipes({ initialRecipes }) {
       </Head>
       <Header />
       <div>Recipes</div>
-      <MyFridge />
+      <MyFridge /> 
       <StyledDiv>
         <SearchInput setRecipes={setRecipes} />
       <Div>

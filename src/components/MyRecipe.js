@@ -3,6 +3,9 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux'
 import { removeFromMyRecipes } from '@/store/slicers/myReceips'
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDown, faAngleUp,faCircleXmark   } from '@fortawesome/free-solid-svg-icons';
+
 
 function MyRecipes() {
     const myRecipes = useSelector(state => state.recipes.recipes);
@@ -35,14 +38,17 @@ function MyRecipes() {
     padding: 20px;
     flex: 1;
   margin-left: 20px;
+  align-items: center;
   `;
   
-  const RecipeTitle = styled.h3`
+  const RecipeTitle = styled.p`
     margin: 0;
+    flex: 1;
   `;
   
   const RemoveButton = styled.button`
-    border: 1px solid black;
+    border: none;
+    background:none;
     padding: 5px 10px;
     cursor: pointer;
     margin-right: 10px;
@@ -50,7 +56,8 @@ function MyRecipes() {
   `;
   
   const ToggleImageButton = styled.button`
-  border: 1px solid black;
+  border:none;
+  background:none;
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 5px; 
@@ -60,26 +67,30 @@ function MyRecipes() {
     display: block;
     max-width: 100%;
     margin-top: 10px;
-  `;
-  
-    
+  `; 
     return (
         <MyRecipesContainer>
       <h2>My Recipes</h2>
       <ul>
         {myRecipes && myRecipes.map((recipe, index) => (
           <li key={index}>
-            <RecipeTitle>{recipe.title}</RecipeTitle>
-            <RemoveButton onClick={() => handleOnClick(recipe.id)}>Remove</RemoveButton>
-            <ToggleImageButton onClick={() => toggleImage(recipe.id, recipe.image)}>
-              {showImage && selectedImage === recipe.image ? 'Hide' : 'Show'}
-            </ToggleImageButton>
-            {showImage && selectedImage === recipe.image && (
-              <div>
-                <RecipeImage src={selectedImage} alt={recipe.title} />
-              </div>
+          <RecipeTitle>{recipe.title}<RemoveButton onClick={() => handleOnClick(recipe.id)}><FontAwesomeIcon icon={faCircleXmark  } /></RemoveButton></RecipeTitle>
+          
+          <ToggleImageButton onClick={() => toggleImage(recipe.id, recipe.image)}>
+            {showImage && selectedImage === recipe.image ? (
+              <FontAwesomeIcon icon={faAngleUp} className="bounce"/>
+            ) : (
+              <FontAwesomeIcon icon={faAngleDown} className="bounce" />
+
             )}
-          </li>
+          </ToggleImageButton>
+          {showImage && selectedImage === recipe.image && (
+            <div>
+              <RecipeImage src={selectedImage} alt={recipe.title} />
+            </div>
+          )}
+        </li>
+        
         ))}
       </ul>
     </MyRecipesContainer>

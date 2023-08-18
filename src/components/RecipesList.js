@@ -17,9 +17,9 @@ function RecipesList({ recipes }) {
   border: 1px solid #ccc;
   padding: 10px;
   margin: 10px;
-  flex: 1;
+  width:12rem;
 `;
- 
+
 const RecipeTitle = styled.h3`
   margin: 0;
 `;  
@@ -37,8 +37,14 @@ border-radius: 5px;
   padding: 5px 10px;
   cursor: pointer;
 `;
+const Div = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px; 
+
+`;
   return (
-    <div>
+    <Div>
       {recipes&&recipes.map((recipe) => {
         return (
           <RecipeContainer key={recipe.id}>
@@ -59,7 +65,7 @@ border-radius: 5px;
         </RecipeContainer>
         )
       })}
-    </div>
+    </Div>
   )
 }
 
