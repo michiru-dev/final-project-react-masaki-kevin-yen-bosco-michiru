@@ -13,7 +13,7 @@ function Header() {
           <Link href="/">Home</Link>
         </li>
         <li>
-          <Link href="recipes">Resipes</Link>
+          <Link href="recipes">Recipes</Link>
         </li>
         <li>
           <Link href="shopping-list">Shopping List</Link>

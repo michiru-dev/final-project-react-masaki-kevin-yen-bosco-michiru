@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { axiosInstance } from '@/axios'
+import styled from 'styled-components';
 
 function SearchInput({ setRecipes }) {
   const [searchString, setSearchString] = useState()
@@ -17,12 +18,15 @@ function SearchInput({ setRecipes }) {
 
       .catch((err) => console.log(err))
   }
-
+  const Div = styled.div`
+  display: flex;
+flex-direction:row;
+`;
   return (
-    <>
-      <input onChange={(e) => handleOnChange(e)} />
+    <Div>
+      <input  placeholder="Search For Recipes" onChange={(e) => handleOnChange(e)} />
       <button onClick={handleOnClick}>Search</button>
-    </>
+    </Div>
   )
 }
 

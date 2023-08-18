@@ -17,5 +17,8 @@
     "react-dom": "18.2.0",
     "react-redux": "^8.1.2",
     "styled-components": "^6.0.7"
+  },
+  "devDependencies": {
+    "babel-plugin-styled-components": "^2.1.4"
   }
 }

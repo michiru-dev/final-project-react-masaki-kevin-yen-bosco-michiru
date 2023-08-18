@@ -6,6 +6,7 @@ import RecipesList from '@/components/RecipesList'
 import MyFridge from '@/components/MyFridge'
 import { axiosInstance } from '@/axios'
 import MyRecipes from '@/components/MyRecipe'
+import styled from 'styled-components';
 
 export const getStaticProps = async () => {
   try {
@@ -29,7 +30,15 @@ export const getStaticProps = async () => {
     }
   }
 }
-
+const StyledDiv = styled.div`
+  display: flex;
+flex-direction:column;
+align-items:center;
+`;
+const Div = styled.div`
+  display: flex;
+flex-direction:row;
+`;
 export default function Recipes({ initialRecipes }) {
   const [recipes, setRecipes] = useState(initialRecipes)
 
@@ -41,9 +50,13 @@ export default function Recipes({ initialRecipes }) {
       <Header />
       <div>Recipes</div>
       <MyFridge />
-      <SearchInput setRecipes={setRecipes} />
+      <StyledDiv>
+        <SearchInput setRecipes={setRecipes} />
+      <Div>
       <RecipesList recipes={recipes} />
       <MyRecipes />
+      </Div>
+      </StyledDiv>
     </>
   )
 }

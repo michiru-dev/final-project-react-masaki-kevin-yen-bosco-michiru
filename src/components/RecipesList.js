@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { useDispatch } from 'react-redux'
 import { addToMyRecipes } from '@/store/slicers/myReceips'
+import styled from 'styled-components';
 
 function RecipesList({ recipes }) {
   const dispatch = useDispatch()
@@ -9,28 +10,53 @@ function RecipesList({ recipes }) {
     dispatch(addToMyRecipes(recipe))
   }
 
+  const RecipeContainer = styled.div`
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  flex: 1;
+`;
+ 
+const RecipeTitle = styled.h3`
+  margin: 0;
+`;  
+
+const RecipeImage = styled.img`
+  display: block;
+  max-width: 200px;
+  max-height: 200px;
+  margin-top: 10px; 
+`;
+
+const AddButton = styled.button`
+border: 1px solid black;
+border-radius: 5px; 
+  padding: 5px 10px;
+  cursor: pointer;
+`;
   return (
     <div>
       {recipes&&recipes.map((recipe) => {
         return (
-          <li key={recipe.id}>
-            <h3>{recipe.title}</h3>
-            <div>
-              <Image
-                src={recipe.image}
-                alt={recipe.title}
-                width={200}
-                height={200}
-              />
-            </div>
-            <button
-              onClick={() => {
-                handleOnClick(recipe)
-              }}
-            >
-              add
-            </button>
-          </li>
+          <RecipeContainer key={recipe.id}>
+          <RecipeTitle>{recipe.title}</RecipeTitle>
+          <div>
+            <RecipeImage
+              src={recipe.image}
+              alt={recipe.title}
+            />
+          </div>
+          <AddButton
+            onClick={() => {
+              handleOnClick(recipe); 
+            }}
+          >
+            Add
+          </AddButton>
+        </RecipeContainer>
         )
       })}
     </div>
