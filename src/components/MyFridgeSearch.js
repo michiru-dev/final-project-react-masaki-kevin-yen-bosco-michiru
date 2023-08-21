@@ -6,8 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { useFetch } from "@/hooks/useFetch";
 import { FaSearch } from "react-icons/fa";
+import useAuth from "../hooks/useAuth";
 
 const MyFridgeSearch = () => {
+    const user = useAuth();
     const [input, setInput] = useState("");
     const dispatch = useDispatch();
     const items = useSelector((state) => state.fridge.items);
@@ -21,6 +23,10 @@ const MyFridgeSearch = () => {
     const searchKeyword = useDebounce(input);
 
     const handleAddClick = () => {
+        if (!user) {
+            window.alert("Please login to add items to your fridge");
+            return;
+        }
         if (input) {
             if (items.includes(input)) {
                 window.alert("This item already exists in the fridge!");
@@ -82,10 +88,10 @@ const MyFridgeSearch = () => {
         padding: 10px 15px;
         font-size: 15px;
         border-radius: 5px;
-        background-color: black;
+        background-color: ${props => props.disabled ? 'gray' : 'black'};
         border: none;
         color: white;
-        cursor: pointer;
+        cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
     `;
 
     const AutoCompleteDropdown = styled.div`
@@ -137,8 +143,7 @@ const MyFridgeSearch = () => {
                     ))}
                 </AutoCompleteDropdown>
             )}
-
-            <AddButton onClick={handleAddClick}>Add</AddButton>
+            <AddButton onClick={handleAddClick} disabled={!user}>Add</AddButton>
         </SreachBar>
     );
 };
