@@ -6,7 +6,6 @@ import RecipesList from '@/components/RecipesList'
 import MyFridge from '@/components/MyFridge'
 import { axiosInstance } from '@/axios'
 import MyRecipes from '@/components/MyRecipe'
-import styled from 'styled-components';
 import FilterArea from '@/components/FilterArea'
 import styled from 'styled-components'
 import { useFetch } from '@/hooks/useFetch'

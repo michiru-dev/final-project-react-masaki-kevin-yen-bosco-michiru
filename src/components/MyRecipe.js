@@ -11,88 +11,84 @@ function MyRecipes() {
   const [selectedImage, setSelectedImage] = useState(null)
   const [showImage, setShowImage] = useState(false)
 
-    const handleOnClick = (recipeId) => {
-      dispatch(removeFromMyRecipes(recipeId))
-    } 
-    const toggleImage = (recipeId, recipeImage) => {
-        if (selectedImage === recipeImage) {
-            setSelectedImage(null);
-            setShowImage(false);
-        } else {
-            setSelectedImage(recipeImage);
-            setShowImage(true);
-        }}
-    console.log(myRecipes)
-    useEffect(() => {
-    
-        console.log('MyRecipes has changed:', myRecipes);
-    }, [myRecipes]);
- 
-    const MyRecipesContainer = styled.div`
-    display:flex;
-    flex-direction:column;
-    font-family: Arial;
-    background-color: #f7f7f7;
-    padding: 20px;
-    flex: 1;
-  margin-left: 20px;
-  align-items: center;
-  `;
-  
-  const RecipeTitle = styled.p`
-    margin: 0;
-    flex: 1;
-  `;
-  
-  const RemoveButton = styled.button`
-    border: none;
-    background:none;
-    padding: 5px 10px;
-    cursor: pointer;
-    margin-right: 10px;
-    border-radius: 5px; 
-  `;
-  
-  const ToggleImageButton = styled.button`
-  border:none;
-  background:none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px; 
-  `;
-  
-  const RecipeImage = styled.img`
-    display: block;
-    max-width: 100%;
-    margin-top: 10px;
-  `; 
-    return (
-        <MyRecipesContainer>
-      <h2>My Recipes</h2>
-      <ul>
-        {myRecipes && myRecipes.map((recipe, index) => (
-          <li key={index}>
-          <RecipeTitle>{recipe.title}<RemoveButton onClick={() => handleOnClick(recipe.id)}><FontAwesomeIcon icon={faCircleXmark  } /></RemoveButton></RecipeTitle>
-          
-          <ToggleImageButton onClick={() => toggleImage(recipe.id, recipe.image)}>
-            {showImage && selectedImage === recipe.image ? (
-              <FontAwesomeIcon icon={faAngleUp} className="bounce"/>
-            ) : (
-              <FontAwesomeIcon icon={faAngleDown} className="bounce" />
+  const handleOnClick = (recipeId) => {
+    dispatch(removeFromMyRecipes(recipeId))
+  }
+  const toggleImage = (recipeId, recipeImage) => {
+    if (selectedImage === recipeImage) {
+      setSelectedImage(null)
+      setShowImage(false)
+    } else {
+      setSelectedImage(recipeImage)
+      setShowImage(true)
+    }
+  }
 
-            )}
-          </ToggleImageButton>
-          {showImage && selectedImage === recipe.image && (
-            <div>
-              <RecipeImage src={selectedImage} alt={recipe.title} />
-            </div>
-          )}
-        </li>
-        
-        ))}
-      </ul>
-    </MyRecipesContainer>
-    );
+  //Style
+  const MyRecipes = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  `
+
+  const MyRecipesTitle = styled.h2`
+    font-size: 30px;
+    margin: 20px;
+  `
+
+  const MyRecipesUl = styled.ul`
+    font-size: 15px;
+    list-style-type: none;
+    padding: 20px;
+    margin: 0;
+  `
+
+  const MyRecipesLi = styled.li`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid;
+    width: 500px;
+    margin: 10px 0;
+  `
+
+  const MyRecipesListTitle = styled.p`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `
+
+  const MyRecipesRemoveBtn = styled.button`
+    font-size: 15px;
+    margin: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+  `
+
+  return (
+    <MyRecipes>
+      <MyRecipesTitle>My Recipes</MyRecipesTitle>
+      <MyRecipesUl>
+        {myRecipes &&
+          myRecipes.map((recipe, index) => (
+            <MyRecipesLi key={index}>
+              <MyRecipesListTitle>{recipe.title}</MyRecipesListTitle>
+
+              <MyRecipesRemoveBtn onClick={() => handleOnClick(recipe.id)}>
+                <TiDelete size={25} />
+              </MyRecipesRemoveBtn>
+              {showImage && selectedImage === recipe.image && (
+                <div>
+                  <img src={selectedImage} alt={recipe.title} />
+                </div>
+              )}
+            </MyRecipesLi>
+          ))}
+      </MyRecipesUl>
+    </MyRecipes>
+  )
 }
 
 export default MyRecipes
