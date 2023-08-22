@@ -1,17 +1,19 @@
-import React, { useState,useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { removeFromMyRecipes } from '@/store/slicers/myReceips'
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp,faCircleXmark   } from '@fortawesome/free-solid-svg-icons';
 
+import { styled } from 'styled-components'
+import { TiDelete } from 'react-icons/ti'
 
 function MyRecipes() {
-    const myRecipes = useSelector(state => state.recipes.recipes);
-    const dispatch = useDispatch()
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [showImage, setShowImage] = useState(false);
+  const myRecipes = useSelector((state) => state.recipes.recipes)
+  const dispatch = useDispatch()
+  const [selectedImage, setSelectedImage] = useState(null)
+  const [showImage, setShowImage] = useState(false)
 
     const handleOnClick = (recipeId) => {
       dispatch(removeFromMyRecipes(recipeId))
@@ -97,4 +99,4 @@ function MyRecipes() {
     );
 }
 
-export default MyRecipes;
+export default MyRecipes

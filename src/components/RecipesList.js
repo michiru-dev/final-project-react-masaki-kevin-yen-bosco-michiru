@@ -1,3 +1,8 @@
+import React from "react";
+import Image from "next/image";
+import { useDispatch } from "react-redux";
+import { addToMyRecipes } from "@/store/slicers/myReceips";
+import { styled } from "styled-components";
 import React from 'react'
 import Image from 'next/image'
 import { useDispatch } from 'react-redux'
@@ -5,10 +10,10 @@ import { addToMyRecipes } from '@/store/slicers/myReceips'
 import styled from 'styled-components';
 
 function RecipesList({ recipes }) {
-  const dispatch = useDispatch()
-  const handleOnClick = (recipe) => {
-    dispatch(addToMyRecipes(recipe))
-  }
+    const dispatch = useDispatch();
+    const handleOnClick = (recipe) => {
+        dispatch(addToMyRecipes(recipe));
+    };
 
   const RecipeContainer = styled.div`
   display:flex;
@@ -42,31 +47,33 @@ const Div = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: 5px; 
 
-`;
-  return (
-    <Div>
-      {recipes&&recipes.map((recipe) => {
-        return (
-          <RecipeContainer key={recipe.id}>
-          <RecipeTitle>{recipe.title}</RecipeTitle>
-          <div>
-            <RecipeImage
-              src={recipe.image}
-              alt={recipe.title}
-            />
-          </div>
-          <AddButton
-            onClick={() => {
-              handleOnClick(recipe); 
-            }}
-          >
-            Add
-          </AddButton>
-        </RecipeContainer>
-        )
-      })}
-    </Div>
-  )
+    return (
+        <RecipesList>
+            {recipes &&
+                recipes.map((recipe) => {
+                    return (
+                        <RecipesListLi key={recipe.id}>
+                            <RecipesItems>
+                                <Image
+                                    src={recipe.image}
+                                    alt={recipe.title}
+                                    width={200}
+                                    height={200}
+                                />
+                                <RecipesTitle>{recipe.title}</RecipesTitle>
+                            </RecipesItems>
+                            <AddBtn
+                                onClick={() => {
+                                    handleOnClick(recipe);
+                                }}
+                            >
+                                Add
+                            </AddBtn>
+                        </RecipesListLi>
+                    );
+                })}
+        </RecipesList>
+    );
 }
 
-export default RecipesList
+export default RecipesList;
