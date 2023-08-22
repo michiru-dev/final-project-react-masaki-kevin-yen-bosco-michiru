@@ -41,7 +41,7 @@ export default function MyFridge() {
             </MyFrigeTitleDiv>
             <MyFridgeSearch />
             <MyFridgeItems />
-            <MyFridgeTip>Selete items to filter the search</MyFridgeTip>
+            <MyFridgeTip>Select items to filter the search</MyFridgeTip>
         </MyFridgeDiv>
     );
 }

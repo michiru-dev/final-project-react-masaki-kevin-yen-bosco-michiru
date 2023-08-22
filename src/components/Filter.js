@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import React, { useState } from "react";
 
 //Style
 const FilterType = styled.div`
@@ -22,6 +23,7 @@ const FilterLabel = styled.label`
     margin: 0 5px;
 `;
 
+
 function Filter({ filterContents, dispatcher, reduxState, label }) {
     const dispatch = useDispatch();
     const storedSearchedItems = useSelector(
@@ -32,9 +34,31 @@ function Filter({ filterContents, dispatcher, reduxState, label }) {
         dispatch(dispatcher(item));
     };
 
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleDropdownToggle = () => {
+        setIsOpen(!isOpen);
+    };
+
+    const handleChange = (item) => {
+        dispatch(dispatcher(item));
+    };
+    const ArrowIcon = styled.span`
+    font-size: 20px;
+    margin-left: 5px;
+    cursor: pointer;
+    transform: ${isOpen ? "rotate(180deg)" : "rotate(0deg)"};
+    transition: transform 0.3s ease-in-out;
+`;
+
+
+
     return (
         <FilterType>
-            <FilterTypeTytle>{label}</FilterTypeTytle>
+            <FilterTypeTytle>{label} <ArrowIcon onClick={handleDropdownToggle}>
+    {isOpen ? "▲ Click To Collapse!" : "▼ Click To Expand!"}
+</ArrowIcon></FilterTypeTytle>
+            {isOpen && (
             <FilterCheck>
                 {filterContents.map((item) => (
                     <FilterLabel key={item}>
@@ -48,6 +72,7 @@ function Filter({ filterContents, dispatcher, reduxState, label }) {
                     </FilterLabel>
                 ))}
             </FilterCheck>
+               )}
         </FilterType>
     );
 }

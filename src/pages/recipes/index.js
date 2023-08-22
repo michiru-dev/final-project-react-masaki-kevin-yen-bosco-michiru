@@ -16,7 +16,7 @@ const RecipesPage = styled.div`
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-    height: 100vh;
+    //height: 100vh;
     width: 100vw;
 `;
 
@@ -32,7 +32,7 @@ const RecipesListArea = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: start;
-    align-items: center;
+    align-items: flex-start;
     background-color: #6a994e;
     border-radius: 20px;
     margin: 0 10px;

@@ -4,6 +4,7 @@ import useAuth from "../hooks/useAuth";
 import styled from "styled-components";
 import { login, logout } from "../lib/auth";
 import { BiLogIn, BiLogOut } from "react-icons/bi";
+import { useRouter } from "next/router";
 
 //Style
 const HeaderDiv = styled.div`
@@ -65,36 +66,57 @@ const LogoutImg = styled(BiLogOut)`
     top: 6px;
 `;
 
+const NavLink = styled.a`
+text-decoration: none;
+color: inherit;
+position: relative;
+transition: transform 0.2s ease-in-out; 
+
+&:hover {
+    text-decoration: underline;
+   transform: translateY(-50px) !important ;
+}
+
+&.active {
+    text-decoration: underline !important;
+    font-weight: bold;
+}
+`;
+
 function Header() {
     const user = useAuth();
+    const router = useRouter();
 
     return (
         <HeaderDiv>
             <CompanyName>FRIDGEFY</CompanyName>
             <HeaderUl>
                 <HeaderLi>
-                    <Link
+                    <NavLink
                         href="/"
                         style={{ textDecoration: "none", color: "inherit" }}
+                        className={router.pathname === "/" ? "active" : ""}
                     >
                         Home
-                    </Link>
+                    </NavLink>
                 </HeaderLi>
                 <HeaderLi>
-                    <Link
+                    <NavLink
                         href="recipes"
                         style={{ textDecoration: "none", color: "inherit" }}
+                        className={router.pathname === "/recipes" ? "active" : ""}
                     >
                         Resipes
-                    </Link>
+                    </NavLink>
                 </HeaderLi>
                 <HeaderLi>
-                    <Link
+                    <NavLink
                         href="shopping-list"
                         style={{ textDecoration: "none", color: "inherit" }}
+                        className={router.pathname === "/shopping-list" ? "active" : ""}
                     >
                         Shopping List
-                    </Link>
+                    </NavLink>
                 </HeaderLi>
             </HeaderUl>
             {user ? (
