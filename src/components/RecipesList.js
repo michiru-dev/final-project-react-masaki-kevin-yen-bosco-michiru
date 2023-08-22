@@ -3,10 +3,13 @@ import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { addToMyRecipes } from "@/store/slicers/myReceips";
 import styled from "styled-components";
+import useAuth from "../hooks/useAuth";
 
 function RecipesList({ recipes }) {
+    const user = useAuth();
     const dispatch = useDispatch();
     const handleOnClick = (recipe) => {
+        if (!user) return
         dispatch(addToMyRecipes(recipe));
     };
 
@@ -48,10 +51,10 @@ function RecipesList({ recipes }) {
         margin-top: 10px;
         font-size: 15px;
         border-radius: 5px;
-        background-color: black;
+        background-color: ${(props) => (props.disabled ? "gray" : "black")};
         border: none;
         color: white;
-        cursor: pointer;
+        cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
     `;
 
     return (
@@ -73,6 +76,7 @@ function RecipesList({ recipes }) {
                                 onClick={() => {
                                     handleOnClick(recipe);
                                 }}
+                                disabled={!user}
                             >
                                 Add
                             </AddBtn>
