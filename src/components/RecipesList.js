@@ -100,7 +100,7 @@ const More = styled.button`
     padding: 10px 15px;
     margin: 10px;
     font-size: 15px;
-    border-radius: 5px;
+    border-radius: 5px; 
     background-color: white;
     border: none;
     color: black;
